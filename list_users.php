@@ -39,15 +39,15 @@ $users = $userModel->getUsers($params);
                 <tbody>
                     <?php foreach ($users as $user) {?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']?></th>
+                            <th scope="row"><?php echo htmlentities( $user['id'], ENT_QUOTES, 'UTF-8', false);?></th>
                             <td>
-                                <?php echo $user['name']?>
+                                <?php echo htmlentities ($user['name'], ENT_QUOTES, 'UTF-8', false);?>
                             </td>
                             <td>
-                                <?php echo $user['fullname']?>
+                                <?php echo htmlentities ($user['fullname'], ENT_QUOTES, 'UTF-8', false);?>
                             </td>
                             <td>
-                                <?php echo $user['type']?>
+                                <?php echo htmlentities ($user['type'], ENT_QUOTES, 'UTF-8', false);?>
                             </td>
                             <td>
                                 <a href="form_user.php?id=<?php echo $user['id'] ?>">
