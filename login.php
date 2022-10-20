@@ -17,7 +17,8 @@ if (!empty($_POST['submit'])) {
         $_SESSION['id'] = $user[0]['id'];
 
         $_SESSION['message'] = 'Login successful';
-        header('location: list_users.php');
+        // header('location: list_users.php');
+        header('location: list_posts.php');
     }else {
         //Login failed
         $_SESSION['message'] = 'Login failed';
