@@ -1,5 +1,11 @@
 <?php
-session_start();
+
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
+
 require_once 'BaseModel.php';
 require_once 'UserModel.php';
 class PostModel extends BaseModel {
