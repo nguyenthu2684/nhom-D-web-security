@@ -1,0 +1,105 @@
+<?php
+
+require_once 'BaseModel.php';
+
+class PostModel extends BaseModel
+{
+
+    public function findPostById($id)
+    {
+        $sql = 'SELECT * FROM posts WHERE id = ' . $id;
+        $post = $this->select($sql);
+
+        return $post;
+    }
+
+    public function findPost($keyword)
+    {
+        $sql = 'SELECT * FROM posts WHERE post_name LIKE %' . $keyword . '%' . ' OR post_name LIKE %' . $keyword . '%';
+        $post = $this->select($sql);
+
+        return $post;
+    }
+
+
+    /**
+     * Delete user by id
+     * @param $id
+     * @return mixed
+     */
+    public function deletePostById($post_id)
+    {
+        $sql = 'DELETE FROM posts WHERE id = ' . $post_id;
+        return $this->delete($sql);
+    }
+
+    // /**
+    //  * Update user
+    //  * @param $input
+    //  * @return mixed
+    //  */
+    // public function updatePost($input) {
+    //     $sql = 'UPDATE posts SET 
+    //              name = "' . mysqli_real_escape_string(self::$_connection, $input['post_name']) .'", 
+    //              password="'. md5($input['password']) .'"
+    //             WHERE id = ' . $input['id'];
+
+    //     $user = $this->update($sql);
+
+    //     return $user;
+    // }
+
+    /**
+     * Insert user
+     * @param $input
+     * @return mixed
+     */
+    public function insertPost($input)
+    {
+        $sql = "INSERT INTO `app_web1`.`posts` (`post_name`, `post_content`) VALUES (" .
+            "'" . $input['name'] . "', '" . $input['content'] . "')";
+
+        $post = $this->insert($sql);
+
+        return $post;
+    }
+
+    /**
+     * Search users
+     * @param array $params
+     * @return array
+     */
+    public function getPost($params = [])
+    {
+        //Keyword
+        if (!empty($params['keyword'])) {
+            $sql = 'SELECT * FROM posts WHERE name LIKE "%' . $params['keyword'] . '%"';
+
+            //Keep this line to use Sql Injection
+            //Don't change
+            //Example keyword: abcef%";TRUNCATE banks;##
+            $posts = self::$_connection->multi_query($sql);
+        } else {
+            $sql = 'SELECT * FROM posts';
+            $posts = $this->select($sql);
+        }
+
+        return $posts;
+    }
+    /**
+     * Update user
+     * @param $input
+     * @return mixed
+     */
+    public function updateUser($input)
+    {
+        $sql = 'UPDATE posts SET 
+                 name = "' . mysqli_real_escape_string(self::$_connection, $input['post_name']) . '", 
+                 content="' . $input['post_content'] . '"
+                WHERE id = ' . $input['id'];
+
+        $user = $this->update($sql);
+
+        return $user;
+    }
+}
